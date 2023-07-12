@@ -6,7 +6,8 @@ import autoprefixer from "autoprefixer";
 export default defineConfig({
   root: "src",
   build: {
-    outDir: resolve(__dirname, "public"),
+    outDir: "../public",
+    emptyOutDir: true,
     rollupOptions: {
       input: {
         main: resolve(__dirname, "src", "index.pug"),
