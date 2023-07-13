@@ -15,7 +15,7 @@ jobs:
           node-version: 18
           cache: 'yarn'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install
       - run: yarn run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
