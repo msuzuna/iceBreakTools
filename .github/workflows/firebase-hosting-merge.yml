@@ -20,11 +20,12 @@ jobs:
         run: yarn install --immutable --immutable-cache --check-cache
       - run: yarn run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
+        env:
+          VITE_OPENAI_ORG: '${{ secrets.VITE_OPENAI_ORG }}'
+          VITE_OPENAI_API_KEY: '${{ secrets.VITE_OPENAI_API_KEY }}'
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ICEBREAK_727FE }}'
           channelId: live
           projectId: icebreak-727fe
-        env:
-          VITE_OPENAI_ORG: '${{ secrets.VITE_OPENAI_ORG }}'
-          VITE_OPENAI_API_KEY: '${{ secrets.VITE_OPENAI_API_KEY }}'
+
