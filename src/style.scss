@@ -1,2 +1,8 @@
 @charset 'utf-8';
 @use 'scss/reset/destyle.scss';
+
+@use 'scss/modules/foundations';
+@use 'scss/components/top';
+@use 'scss/components/loader';
+@use 'scss/components/paperModal';
+@use 'scss/modules/utility';

@@ -1,0 +1,23 @@
+$colors: (
+  'black-800': #212121,
+  'white-100': #fff,
+  'gray-600': #757575,
+  'gray-200': #bdbdbd,
+  'blue-gray-500': #416475,
+  'blue-gray-400': #607d8b,
+  'blue-gray-200': #bcc8ce,
+  'brown-500': #5d4037,
+  'brown-400': #795548,
+  'brown-200': #d7ccc8,
+);
+
+$primary-text: map-get($colors, black-800);
+$seconday-text: map-get($colors, gray-600);
+$other-text: map-get($colors, white-100);
+$primary: map-get($colors, brown-400);
+$dark-primary: map-get($colors, brown-500);
+$light-primary: map-get($colors, brown-200);
+$accent: map-get($colors, blue-gray-400);
+$accent-dark: map-get($colors, blue-gray-500);
+$accent-light: map-get($colors, blue-gray-200);
+$divider: map-get($colors, gray-200);
