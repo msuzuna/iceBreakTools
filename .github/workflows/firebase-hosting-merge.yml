@@ -25,3 +25,6 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ICEBREAK_727FE }}'
           channelId: live
           projectId: icebreak-727fe
+        env:
+          VITE_OPENAI_ORG: '${{ secrets.VITE_OPENAI_ORG }}'
+          VITE_OPENAI_API_KEY: '${{ secrets.VITE_OPENAI_API_KEY }}'
