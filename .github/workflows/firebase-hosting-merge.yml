@@ -6,14 +6,15 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - master
-env:
-  VITE_OPENAI_ORG: '${{ secrets.VITE_OPENAI_ORG }}'
-  VITE_OPENAI_API_KEY: '${{ secrets.VITE_OPENAI_API_KEY }}'
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: create .env file
+        run: |
+          echo "VITE_OPENAI_ORG: '${{ secrets.VITE_OPENAI_ORG }}'" >> .env
+          echo "VITE_OPENAI_API_KEY: '${{ secrets.VITE_OPENAI_API_KEY }}'" >> .env
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
