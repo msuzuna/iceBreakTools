@@ -8,9 +8,11 @@ export const getTheme = function () {
     document.querySelector('.js-entryButton')
   );
 
+  console.log(import.meta.env.VITE_OPENAI_ORG);
+
   const configuration = new Configuration({
-    organization: 'org-LCf4Mp0PxwPLVaoCcpBZnXyD',
-    apiKey: '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',
+    organization: import.meta.env.VITE_OPENAI_ORG,
+    apiKey: import.meta.env.VITE_OPENAI_API_KEY
   });
   const openai = new OpenAIApi(configuration);
 

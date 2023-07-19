@@ -5,6 +5,7 @@ import autoprefixer from "autoprefixer";
 
 export default defineConfig({
   root: "src",
+  envDir: '../',
   build: {
     outDir: "../public",
     emptyOutDir: true,
