@@ -22,5 +22,6 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ICEBREAK_727FE }}'
           projectId: icebreak-727fe
-          openai-organization: ${{ secrets.VITE_OPENAI_ORG }}
-          openai-api-key: ${{ secrets.VITE_OPENAI_API_KEY }}
+        env:
+          VITE_OPENAI_ORG: ${{ secrets.VITE_OPENAI_ORG }}
+          VITE_OPENAI_API_KEY: ${{ secrets.VITE_OPENAI_API_KEY }}
