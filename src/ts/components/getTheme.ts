@@ -1,6 +1,6 @@
 import { Configuration, OpenAIApi } from 'openai';
-import db from '../lib/firebase';
-import { DocumentData, doc, getDoc, setDoc } from 'firebase/firestore';
+// import db from '../lib/firebase';
+// import { DocumentData, doc, getDoc, setDoc } from 'firebase/firestore';
 import { draw } from './draw';
 
 export const getTheme = function () {

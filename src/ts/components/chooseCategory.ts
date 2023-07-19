@@ -1,5 +1,5 @@
 import db from '../lib/firebase';
-import { DocumentData, doc, getDoc, setDoc } from 'firebase/firestore';
+import { DocumentData, doc, getDoc } from 'firebase/firestore';
 
 export const chooseCategory = function () {
   const $categoryList = <Element>document.querySelector('.js-category');
@@ -63,7 +63,7 @@ export const chooseCategory = function () {
         });
       },
       (error) => {
-        console.log('失敗');
+        console.log(error);
       }
     );
   });
