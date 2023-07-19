@@ -17,11 +17,12 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - run: yarn run build
+        env:
+          VITE_OPENAI_ORG: '${{ secrets.VITE_OPENAI_ORG }}'
+          VITE_OPENAI_API_KEY: '${{ secrets.VITE_OPENAI_API_KEY }}'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ICEBREAK_727FE }}'
           projectId: icebreak-727fe
-        env:
-          VITE_OPENAI_ORG: '${{ secrets.VITE_OPENAI_ORG }}'
-          VITE_OPENAI_API_KEY: '${{ secrets.VITE_OPENAI_API_KEY }}'
+
