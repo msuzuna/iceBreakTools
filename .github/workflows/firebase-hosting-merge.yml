@@ -22,7 +22,7 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
-      - run: yarn run build
+      - run: VITE_OPENAI_ORG=${{ secrets.VITE_OPENAI_ORG }} VITE_OPENAI_API_KEY=${{ secrets.VITE_OPENAI_API_KEY }} yarn run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
