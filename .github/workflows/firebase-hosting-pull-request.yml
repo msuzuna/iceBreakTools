@@ -9,9 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: yarn run build
+      - name: create .env file
+        run: |
+          echo "VITE_OPENAI_ORG=${{ secrets.VITE_OPENAI_ORG }}" >> .env
+          echo "VITE_OPENAI_API_KEY=${{ secrets.VITE_OPENAI_API_KEY }}" >> .env
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install
+      - run: VITE_OPENAI_ORG=${{ secrets.VITE_OPENAI_ORG }} VITE_OPENAI_API_KEY=${{ secrets.VITE_OPENAI_API_KEY }} yarn run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ICEBREAK_727FE }}'
           projectId: icebreak-727fe
+
