@@ -1,6 +1,4 @@
 import { Configuration, OpenAIApi } from 'openai';
-// import db from '../lib/firebase';
-// import { DocumentData, doc, getDoc, setDoc } from 'firebase/firestore';
 import { draw } from './draw';
 
 export const getTheme = function () {
@@ -8,11 +6,9 @@ export const getTheme = function () {
     document.querySelector('.js-entryButton')
   );
 
-  console.log(import.meta.env.VITE_OPENAI_ORG);
-
   const configuration = new Configuration({
     organization: import.meta.env.VITE_OPENAI_ORG,
-    apiKey: import.meta.env.VITE_OPENAI_API_KEY
+    apiKey: import.meta.env.VITE_OPENAI_API_KEY,
   });
   const openai = new OpenAIApi(configuration);
 
@@ -50,7 +46,7 @@ export const getTheme = function () {
       const themeArray = inputArray?.map((element) => {
         return element.substring(3, element.length);
       });
-      console.log(themeArray);
+
       document.querySelector('.js-loader')?.remove();
       document.querySelector('.js-main')?.classList.remove('is-invisible');
       draw();
