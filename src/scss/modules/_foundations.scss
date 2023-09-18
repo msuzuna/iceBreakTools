@@ -1,0 +1,6 @@
+@use '../modules/variables' as var;
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var.$primary-text;
+}
