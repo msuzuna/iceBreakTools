@@ -246,9 +246,9 @@ textarea {
   text-align: inherit;
   text-transform: inherit; /* 2 */
   vertical-align: middle;
+  appearance: none;
   background: transparent;
   border-radius: 0; /* 1 */
-  appearance: none;
 }
 
 /**
@@ -362,8 +362,8 @@ textarea {
  */
 
 ::-webkit-file-upload-button {
-  appearance: button; /* 1 */
   font: inherit; /* 2 */
+  appearance: button; /* 1 */
 }
 
 /**

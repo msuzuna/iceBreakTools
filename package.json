@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "lint:scss": "stylelint src/**/*.scss --fix",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -12,18 +13,28 @@
     "@types/node": "^20.4.1",
     "@types/pug": "^2.0.6",
     "autoprefixer": "^10.4.14",
+    "dotenv": "^16.3.1",
     "eslint": "^8.44.0",
     "openai": "^3.3.0",
     "prettier": "^3.0.0",
     "pug": "^3.0.2",
     "sass": "^1.63.6",
     "stylelint": "^15.10.1",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-recess-order": "^4.3.0",
+    "stylelint-config-recommended-scss": "^12.0.0",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-config-standard-scss": "^10.0.0",
+    "stylelint-order": "^6.0.3",
+    "stylelint-prettier": "^4.0.0",
+    "stylelint-scss": "^5.0.1",
     "three": "^0.154.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "firebase": "^10.0.0"
+    "firebase": "^10.0.0",
+    "tailwindcss": "^3.3.3"
   },
   "browserslist": [
     "last 2 version",
