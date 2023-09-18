@@ -1,10 +1,8 @@
 import db from '../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 
-export const getTheme = function () {
-  const createRoomButton = <HTMLButtonElement>(
-    document.querySelector('.js-entryButton')
-  );
+export const test = function () {
+  const testButton = <HTMLButtonElement>document.querySelector('.js-test');
 
   // ランダム文字列の生成
   const createRandomId = function () {
@@ -20,7 +18,7 @@ export const getTheme = function () {
     return result;
   };
 
-  createRoomButton.addEventListener('click', function () {
+  testButton.addEventListener('click', function () {
     let labelText = <string>'';
 
     const $category = <NodeList>(
@@ -37,14 +35,18 @@ export const getTheme = function () {
 
     const params = { theme: labelText };
     const query = new URLSearchParams(params);
-    const url = `https://us-central1-icebreak-727fe.cloudfunctions.net/getTalkTheme?${query}`;
-
-    document.querySelector('.js-top')?.remove();
-    document.querySelector('.js-loader')?.classList.remove('is-invisible');
+    const url = `http://127.0.0.1:5001/icebreak-727fe/us-central1/getTalkTheme?${query}`;
 
     fetch(url)
       .then((response) => {
         return response.json();
+
+        // const obj = {
+        //   1: {
+        //     talkTheme: 'ピザの魅力',
+        //     isOpend: false,
+        //   },
+        // };
       })
       .then(function (json) {
         interface Obj {
@@ -58,12 +60,15 @@ export const getTheme = function () {
             isOpened: false,
           };
         }
+        console.log(obj);
         // dbにinputの文字列を追加
         const id = createRandomId();
         const docRef = setDoc(doc(db, 'page', id), obj);
         docRef.then(
           () => {
-            location.href = `https://icebreak-727fe.web.app/room?pageID=${id}`;
+            console.log('DBに書き込めたよ！');
+            // location.href = `http://127.0.0.1:5001/icebreak-727fe/us-central1/displayRoom?pageID=${id}`;
+            location.href = `http://localhost:5173/room/index.html?pageID=${id}`;
           },
           (error) => {
             console.log(error);
@@ -73,5 +78,17 @@ export const getTheme = function () {
       .catch((error) => {
         console.error('Error:', error);
       });
+
+    // fetch('http://127.0.0.1:5001/icebreak-727fe/us-central1/helloWorld')
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error:', error);
+    //   });
+    // window.location.href =
+    //   'http://127.0.0.1:5001/icebreak-727fe/us-central1/helloWorld';
+
+    // Forestoreへの書き込みテスト
   });
 };

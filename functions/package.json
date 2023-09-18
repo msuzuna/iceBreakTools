@@ -1,5 +1,7 @@
 {
   "name": "functions",
+  "type": "module",
+  "main": "lib/index.js",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",
@@ -13,7 +15,7 @@
   "engines": {
     "node": "18"
   },
-  "main": "lib/index.js",
+  "exports": "./lib/index.js",
   "dependencies": {
     "firebase-admin": "^11.10.1",
     "firebase-functions": "^4.4.1"
