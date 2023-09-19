@@ -1,0 +1,45 @@
+@charset 'utf-8';
+
+.paperModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  visibility: hidden;
+  background-color: rgb(0 0 0 / 70%);
+  opacity: 0;
+  transition:
+    opacity 1s,
+    visibility 1s;
+
+  &.is-active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__inner {
+    position: absolute;
+    top: calc(100vh + 300px);
+    left: 50%;
+    width: 800px;
+    height: 700px;
+    background-color: #fff;
+    transition: top 2s ease-in-out 1s;
+    transform: translate(-50%, -50%);
+
+    &.is-active {
+      top: 50%;
+    }
+  }
+
+  &__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    font-size: 40px;
+    transform: translate(-50%, -50%);
+  }
+}

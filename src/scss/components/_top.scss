@@ -1,0 +1,73 @@
+@use '../modules/variables' as var;
+
+.top {
+  &__button {
+    display: block;
+    margin: 40px auto 0;
+  }
+}
+
+.category {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 20px;
+  margin: 0 auto;
+
+  &__input {
+    opacity: 0;
+
+    &:checked {
+      + .category__label {
+        color: var.$other-text;
+        background-color: var.$dark-primary;
+        border: 1px solid var.$dark-primary;
+      }
+    }
+  }
+
+  &__label {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: var.$light-primary;
+    border: 1px solid var.$divider;
+    border-radius: 6px;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var.$other-text;
+        background-color: var.$primary;
+        border: 1px solid var.$primary;
+      }
+    }
+  }
+}
+
+.entryButton {
+  padding: 10px 20px;
+  color: var.$primary-text;
+  background-color: var.$accent-light;
+  border: 1px solid var.$accent;
+  border-radius: 6px;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var.$other-text;
+      background-color: var.$accent;
+    }
+  }
+
+  &--inactive {
+    color: var.$other-text;
+    background-color: var.$divider;
+    border: 1px solid var.$divider;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var.$other-text;
+        background-color: var.$divider;
+      }
+    }
+  }
+}
