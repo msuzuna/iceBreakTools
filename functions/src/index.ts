@@ -40,24 +40,24 @@ export const getTalkTheme = functions.https.onRequest((request, response) => {
 
 export const displayRoom = functions.https.onRequest((request, response) => {
   const html = `
-    <!DOCTYPE html>
-    <html lang="ja">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap">
-    <title>アイスブレークツール</title>
-    <script type="module" crossorigin src="/assets/roomTest-0d77c9d7.js">
-    </script>
-    <link rel="stylesheet" href="/assets/index-f7d4a071.css">
-    </head>
-    <body>
-    <div class="main js-main"><div class="paperModal" id="paperModalWindow">
-    <div class="paperModal__inner" id="paperModal">
-    <p class="paperModal__text" id="paperModalText"></p>
-    </div></div></div></body></html>`;
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap">
+  <title>アイスブレークツール</title>
+  <script type="module" crossorigin src="/assets/roomTest-3fb292c5.js">
+  </script>
+  <link rel="stylesheet" href="/assets/index-f7d4a071.css">
+  </head>
+  <body>
+  <div class="main js-main"><div class="paperModal" id="paperModalWindow">
+  <div class="paperModal__inner" id="paperModal">
+  <p class="paperModal__text" id="paperModalText"></p>
+  </div></div></div></body></html>`;
   functions.logger.info(displayRoom, { structuredData: true });
   response.set('Access-Control-Allow-Headers', '*');
   response.set('Access-Control-Allow-Origin', '*');

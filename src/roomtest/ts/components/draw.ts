@@ -177,119 +177,121 @@ export const draw = function () {
   /**
    * firebase firestoreからトークテーマオブジェクトを取得
    */
-  const searchParams = new URLSearchParams(window.location.search);
-  const pageID = <string>searchParams.get('pageID');
-  if (pageID === '') {
-    location.href = 'https://icebreak-727fe.web.app/';
-  }
-  const firestoreDoc = doc(db, 'page', pageID);
-  const querySnapShot = getDoc(firestoreDoc);
-  querySnapShot.then((value) => {
-    const talkThemeObject = <DocumentData>value.data();
+  window.addEventListener('load', function () {
+    const searchParams = new URLSearchParams(window.location.search);
+    const pageID = <string>searchParams.get('pageID');
+    if (pageID === '') {
+      location.href = 'https://icebreak-727fe.web.app/';
+    }
+    const firestoreDoc = doc(db, 'page', pageID);
+    const querySnapShot = getDoc(firestoreDoc);
+    querySnapShot.then((value) => {
+      const talkThemeObject = <DocumentData>value.data();
 
-    // HTMLCanvasElement要素それぞれに対して図形を描写
-    canvasArray.forEach((canvas, index) => {
-      if (canvas.getContext) {
-        // canvasのコンテキスト取得
-        const context = <CanvasRenderingContext2D>canvas.getContext('2d');
-        const canvasLength: number = canvas.clientHeight; //canvasの高さ取得
+      // HTMLCanvasElement要素それぞれに対して図形を描写
+      canvasArray.forEach((canvas, index) => {
+        if (canvas.getContext) {
+          // canvasのコンテキスト取得
+          const context = <CanvasRenderingContext2D>canvas.getContext('2d');
+          const canvasLength: number = canvas.clientHeight; //canvasの高さ取得
 
-        const objects: Array<BackPentagon | Paper | FrontPentagon> = [];
-        const backPentagon = new BackPentagon();
-        const paper = new Paper(20, 40, 160, 140, 1);
-        const frontPentagon = new FrontPentagon();
-        const paperText = new PaperText(talkThemeObject[index].theme);
+          const objects: Array<BackPentagon | Paper | FrontPentagon> = [];
+          const backPentagon = new BackPentagon();
+          const paper = new Paper(20, 40, 160, 140, 1);
+          const frontPentagon = new FrontPentagon();
+          const paperText = new PaperText(talkThemeObject[index].theme);
 
-        if (talkThemeObject[index].isOpened) {
-          paper.y = (canvasLength - paper.height) / 2;
-          objects.splice(1, 1, backPentagon);
-          objects.push(frontPentagon);
-          objects.splice(3, 1, paper);
-          objects.push(paperText);
-          objects;
+          if (talkThemeObject[index].isOpened) {
+            paper.y = (canvasLength - paper.height) / 2;
+            objects.splice(1, 1, backPentagon);
+            objects.push(frontPentagon);
+            objects.splice(3, 1, paper);
+            objects.push(paperText);
+            objects;
 
-          context.clearRect(0, 0, canvasLength, canvasLength); // clear canvas
-          objects.forEach((obj) => obj.render(context));
-        } else {
-          objects.push(backPentagon);
-          objects.push(paper);
-          objects.push(frontPentagon);
-          context.clearRect(0, 0, canvasLength, canvasLength); // clear canvas
-          objects.forEach((obj) => obj.render(context));
-
-          const movePaper = function () {
             context.clearRect(0, 0, canvasLength, canvasLength); // clear canvas
-
-            // 各オブジェクトの状態を更新する。
-            objects.forEach((obj) => obj.update(isActive));
-
-            // 各オブジェクトを描画する。
+            objects.forEach((obj) => obj.render(context));
+          } else {
+            objects.push(backPentagon);
+            objects.push(paper);
+            objects.push(frontPentagon);
+            context.clearRect(0, 0, canvasLength, canvasLength); // clear canvas
             objects.forEach((obj) => obj.render(context));
 
-            if (paper.y === 15 || paper.y === 41) {
-              clearInterval(interval);
-            }
-          };
-
-          let isActive: boolean = true;
-          let interval: number;
-
-          canvas.addEventListener('mouseover', function () {
-            if (objects[1] === paper) {
-              clearInterval(interval);
-              isActive = true;
-              interval = setInterval(movePaper, 10, isActive);
-            }
-          });
-
-          canvas.addEventListener('mouseout', function () {
-            if (objects[1] === paper) {
-              clearInterval(interval);
-              isActive = false;
-              interval = setInterval(movePaper, 10, isActive);
-            }
-          });
-
-          canvas.addEventListener('click', function () {
-            clearInterval(interval);
-
-            paperModalText.innerText = talkThemeObject[index].theme;
-            paperModalWindow.classList.add('is-active');
-            paperModal.classList.add('is-active');
-
-            const docUpdate = updateDoc(firestoreDoc, {
-              index: {
-                isOpend: true,
-              },
-            });
-            docUpdate.then(
-              () => {
-                return;
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
-
-            setTimeout(() => {
-              paper.y = (canvasLength - paper.height) / 2;
-              objects.splice(1, 1, backPentagon);
-              objects.splice(3, 1, paper);
-              objects.push(paperText);
+            const movePaper = function () {
               context.clearRect(0, 0, canvasLength, canvasLength); // clear canvas
+
+              // 各オブジェクトの状態を更新する。
+              objects.forEach((obj) => obj.update(isActive));
+
+              // 各オブジェクトを描画する。
               objects.forEach((obj) => obj.render(context));
-            }, 3000);
 
-            setTimeout(() => {
-              paperModalWindow.classList.remove('is-active');
-            }, 6000);
+              if (paper.y === 15 || paper.y === 41) {
+                clearInterval(interval);
+              }
+            };
 
-            setTimeout(() => {
-              paperModal.classList.remove('is-active');
-            }, 7000);
-          });
+            let isActive: boolean = true;
+            let interval: number;
+
+            canvas.addEventListener('mouseover', function () {
+              if (objects[1] === paper) {
+                clearInterval(interval);
+                isActive = true;
+                interval = setInterval(movePaper, 10, isActive);
+              }
+            });
+
+            canvas.addEventListener('mouseout', function () {
+              if (objects[1] === paper) {
+                clearInterval(interval);
+                isActive = false;
+                interval = setInterval(movePaper, 10, isActive);
+              }
+            });
+
+            canvas.addEventListener('click', function () {
+              clearInterval(interval);
+
+              paperModalText.innerText = talkThemeObject[index].theme;
+              paperModalWindow.classList.add('is-active');
+              paperModal.classList.add('is-active');
+
+              updateDoc(firestoreDoc, {
+                [index]: {
+                  isOpened: true,
+                  theme: talkThemeObject[index].theme,
+                },
+              }).then(
+                () => {
+                  return;
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+
+              setTimeout(() => {
+                paper.y = (canvasLength - paper.height) / 2;
+                objects.splice(1, 1, backPentagon);
+                objects.splice(3, 1, paper);
+                objects.push(paperText);
+                context.clearRect(0, 0, canvasLength, canvasLength); // clear canvas
+                objects.forEach((obj) => obj.render(context));
+              }, 3000);
+
+              setTimeout(() => {
+                paperModalWindow.classList.remove('is-active');
+              }, 6000);
+
+              setTimeout(() => {
+                paperModal.classList.remove('is-active');
+              }, 7000);
+            });
+          }
         }
-      }
+      });
     });
   });
 };
